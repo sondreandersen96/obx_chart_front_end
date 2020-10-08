@@ -1,0 +1,61 @@
+
+
+
+.searchContainer {
+    text-align: center;
+    margin-top: 50px;
+    margin: auto;
+    width: 400px;
+    padding: 10px;
+}
+
+
+.formStyle {
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 1.0);
+    transition: all .2s ease-in;
+}
+
+
+.searchBox {
+    width: auto;
+    font-size: 23px;
+    text-align: left;
+    appearance: none;
+    outline: none;
+    border: 0px;
+    padding: 14px;
+    padding-left: 0px;
+    text-transform: uppercase;
+}
+
+
+
+.searchIconStyle {
+    float: left;
+    width: 30px;
+    margin-top: 12px;
+    margin-left: 40px;
+    margin-right: 0px;
+}
+
+
+
+
+
+.formStyle:focus-within {
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 1.0);
+}
+
+
+
+.formStyle:hover {
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 1.0);
+}
+
+
+
+
+
+
