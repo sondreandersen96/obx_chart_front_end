@@ -12,7 +12,7 @@ import SearchBar from './components/layout/search_bar.js';
 class App extends React.Component {
 
   state = {
-    tickers: ['NEL', 'HYDRO', 'TEL', 'EQNR', 'SALM', 'BAKKA']
+    tickers: ['NEL', 'HYDRO', 'TEL', 'EQNR', 'SALM', 'BAKKA', 'MOWI', 'HYDRO', 'APPL', 'GOOGL', 'YAHOO', 'MER']
   }
 
 

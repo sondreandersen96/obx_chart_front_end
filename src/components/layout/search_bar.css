@@ -53,18 +53,8 @@
     overflow: auto;
 }
 
-.suggestionBoxItem {
-    width: auto;
-    font-size: 23px;
-    padding-left: 105px;
-    padding-top: 6px;
-    padding-bottom: 4px;
-    display: block;
-    color: #666666;
-    text-transform: uppercase;
-    transition: all .2s ease-in;
-    cursor: pointer;
-}
+
+
 
 
 
@@ -89,14 +79,6 @@
 
 .formStyle:hover {
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 1.0);
-}
-
-
-
-
-.suggestionBoxItem:hover {
-    color: black;
-    background: #cccccc;
 }
 
 

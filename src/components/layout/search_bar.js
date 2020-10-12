@@ -1,6 +1,7 @@
 import React from 'react';
 import './search_bar.css';
-import SuggestionItem from './SuggestionItem'
+import Suggestions from './Suggestions';
+
 
 class SearchBar extends React.Component {
 
@@ -29,6 +30,8 @@ class SearchBar extends React.Component {
     }
 
     // Gives style of either block or none, depending on the state variable searchBoxDisplay
+    
+    // TA BORT DENNE!!!!
     getSuggestionsStyle = () => {
         return {
             display: this.state.searchBoxDisplay ? 'block' : 'none'
@@ -71,6 +74,26 @@ class SearchBar extends React.Component {
                     </input>
                 </form>
                 <div className='suggestionBoxStyle' style={this.getSuggestionsStyle()}>
+                    <Suggestions tickers={this.props.tickers} searchBoxDisplay={this.state.searchBoxDisplay}/>
+                </div>
+                
+
+
+
+
+
+
+
+                
+            </div>
+        )
+    }
+}
+
+
+
+/*
+                <div className='suggestionBoxStyle' style={this.getSuggestionsStyle()}>
                     <a className='suggestionBoxItem' >Halla</a>
                     <a className='suggestionBoxItem' >Halla</a>
                     <a className='suggestionBoxItem' >Halla</a>
@@ -96,15 +119,7 @@ class SearchBar extends React.Component {
 
                 </div>
 
-                
-            </div>
-        )
-    }
-}
-
-
-
-
+*/
 
 
 
