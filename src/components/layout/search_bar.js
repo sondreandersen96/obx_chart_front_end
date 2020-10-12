@@ -1,12 +1,13 @@
 import React from 'react';
 import './search_bar.css';
-
+import SuggestionItem from './SuggestionItem'
 
 class SearchBar extends React.Component {
 
     // This component level state stores the input into the search box. 
     state = {
         search: '',
+        searchBoxDisplay: false,
     }
 
     // Handling input into the text box.
@@ -17,19 +18,50 @@ class SearchBar extends React.Component {
 
     inputSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state.search)
+        console.log(this.state.search);
         this.setState({ search: ""});
     }
 
+    handleClick = (e) =>  {
+        e.preventDefault();
+        alert('!!!!');
+        console.log('Clicked');
+    }
 
+    // Gives style of either block or none, depending on the state variable searchBoxDisplay
+    getSuggestionsStyle = () => {
+        return {
+            display: this.state.searchBoxDisplay ? 'block' : 'none'
+        }
+    }
+    getFormStyle = () => {
+        return {
+            borderBottomLeftRadius: this.state.searchBoxDisplay ? '0px' : '20px',
+            borderBottomRightRadius: this.state.searchBoxDisplay ? '0px' : '20px',
+        }
+    }
+
+    // https://stackoverflow.com/questions/36695438/detect-click-outside-div-using-javascript
+    detectClicks = () => window.addEventListener('click', (e) => {
+        if (document.getElementById('inputField').contains(e.target)) {
+            this.setState({searchBoxDisplay: true});
+        } else if (document.getElementById('searchContainer').contains(e.target)) {
+            this.setState({searchBoxDisplay: true});
+        } else {
+            this.setState({searchBoxDisplay: false});
+        }
+    })
 
 
     render() {
+        this.detectClicks();
         return (
-            <div  class='searchContainer'>
-                <form onSubmit={this.inputSubmit} className='formStyle'>
+            <div  id='searchContainer' className='searchContainer'>
+                <form onSubmit={this.inputSubmit} className='formStyle' style={this.getFormStyle()}>
                     <img src={process.env.PUBLIC_URL + '/search_icon.png'} className='searchIconStyle'></img>
                     <input 
+                        id='inputField'
+                        onClick={() => console.log('clicked')}
                         className='searchBox'
                         maxLength='8'
                         placeholder='Ticker...'
@@ -38,12 +70,37 @@ class SearchBar extends React.Component {
                     >
                     </input>
                 </form>
+                <div className='suggestionBoxStyle' style={this.getSuggestionsStyle()}>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+                    <a className='suggestionBoxItem' >Halla</a>
+
+                </div>
+
                 
             </div>
         )
     }
 }
-
 
 
 

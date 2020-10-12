@@ -1,0 +1,22 @@
+.suggestionBoxItem {
+    width: auto;
+    font-size: 23px;
+    padding-left: 105px;
+    padding-top: 6px;
+    padding-bottom: 4px;
+    display: block;
+    color: #666666;
+    text-transform: uppercase;
+    transition: all .2s ease-in;
+    cursor: pointer;
+}
+
+
+
+
+.suggestionBoxItem:hover {
+    color: black;
+    background: #cccccc;
+}
+
+

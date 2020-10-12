@@ -9,14 +9,15 @@
     padding: 10px;
 }
 
-
 .formStyle {
-    border-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     background: white;
     box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 1.0);
     transition: all .2s ease-in;
 }
-
 
 .searchBox {
     width: auto;
@@ -30,8 +31,6 @@
     text-transform: uppercase;
 }
 
-
-
 .searchIconStyle {
     float: left;
     width: 30px;
@@ -44,11 +43,49 @@
 
 
 
-.formStyle:focus-within {
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 1.0);
+.suggestionBoxStyle {
+    background: white;
+    height: 400px;
+    display: none;
+    text-align: left;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: auto;
+}
+
+.suggestionBoxItem {
+    width: auto;
+    font-size: 23px;
+    padding-left: 105px;
+    padding-top: 6px;
+    padding-bottom: 4px;
+    display: block;
+    color: #666666;
+    text-transform: uppercase;
+    transition: all .2s ease-in;
+    cursor: pointer;
 }
 
 
+
+
+
+/*
+.formStyle:focus-within {
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 1.0);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+*/
+
+/*
+.formStyle:focus-within + .suggestionBoxStyle {
+    display: block;
+}
+.formStyle:hover + .suggestionBoxStyle {
+    display: block;
+}
+*/
 
 .formStyle:hover {
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 1.0);
@@ -56,6 +93,11 @@
 
 
 
+
+.suggestionBoxItem:hover {
+    color: black;
+    background: #cccccc;
+}
 
 
 

@@ -11,13 +11,21 @@ import SearchBar from './components/layout/search_bar.js';
 
 class App extends React.Component {
 
+  state = {
+    tickers: ['NEL', 'HYDRO', 'TEL', 'EQNR', 'SALM', 'BAKKA']
+  }
+
+
+
+
+
   render() {
     return (
       <div className="App">
         <Header/>
         <Title/>
         <div style={searchBarStyle}>
-          <SearchBar/>
+          <SearchBar tickers={this.state.tickers} />
         </div>
         
       </div>
