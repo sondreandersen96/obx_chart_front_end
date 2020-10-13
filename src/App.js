@@ -67,6 +67,11 @@ class App extends React.Component {
   }
 
 
+  loadData = (searchWord) => {
+    console.log('this is the search word comming from the app.js script.', searchWord )
+  }
+
+
 
   render() {
     return (
@@ -74,7 +79,7 @@ class App extends React.Component {
         <Header/>
         <Title/>
         <div style={searchBarStyle}>
-          <SearchBar tickers={this.state.tickers} />
+          <SearchBar loadData={this.loadData} tickers={this.state.tickers} />
         </div>
         
       </div>

@@ -13,7 +13,13 @@ class SearchBar extends React.Component {
 
     componentDidMount = () => {
         // Listening for clicks, functions: 1) Controll visibility of dropdown box. 
-        document.addEventListener('mousedown', this.detectClicks, false);        
+        document.addEventListener('mousedown', this.detectClicks, false); 
+        document.addEventListener('keypress', (e) => {
+            if (e.key == 'Enter' && this.state.searchBoxDisplay) {
+                // Runs the function that loads data on a new company.
+                this.search();
+            }
+        })       
     }
 
     // Handling input into the text box.
@@ -21,20 +27,35 @@ class SearchBar extends React.Component {
         this.setState({search: e.target.value})
     }
 
-
     inputSubmit = (e) => {
-        e.preventDefault();
-        console.log(this.state.search);
-        this.setState({ search: ""});
+        e.preventDefault(); // Prevent the standard refresh when submitting a form. 
+        this.search(); // Runs the function that loads data on a new company.
     }
 
-    
-    handleClick = (e) =>  {
-        e.preventDefault();
-        alert('!!!!');
-        console.log('Clicked');
+    // This functin should be called whenever we want to submit the input from the search field. 
+    search = () => {
+        console.log(this.state.search);
+
+        // Calls the loaddata function in the main file with the search word as parameter. 
+        this.props.loadData(this.state.search.toUpperCase())
+
+        // Clearing search field
+        this.setState({ search: ""});
+
+        // Closes the suggestion dropdown. 
+        this.setState({searchBoxDisplay: false})
     }
-    
+
+
+    // This function detects clicks on the suggestions and put the suggestion into the search field og searches. 
+    clickOnSuggestion = (e) => {
+        this.setState({search: e.target.text}); // This is strictly "un-functional" as the this.search() function is now called here. 
+        this.search();
+    }
+
+
+
+
 
     // Gives style of either block or none, depending on the state variable searchBoxDisplay
     getSuggestionsStyle = () => {
@@ -51,6 +72,7 @@ class SearchBar extends React.Component {
 
 
     // https://stackoverflow.com/questions/36695438/detect-click-outside-div-using-javascript
+    // Checks if clicks are inside or outside search box, and sets the state of searchBoxDisplay accordingly. 
     detectClicks = (e) => {
         if (document.getElementById('inputField').contains(e.target)) {
             this.setState({searchBoxDisplay: true});
@@ -64,11 +86,6 @@ class SearchBar extends React.Component {
         console.log(counter)
     }
 
-    // This function detects clicks on the suggestions and put the suggestion into the search field. 
-    clickOnSuggestion = (e) => {
-        this.setState({search: e.target.text})
-        console.log(e.target.text);
-    }
 
 
 
@@ -86,6 +103,7 @@ class SearchBar extends React.Component {
                         placeholder='Ticker...'
                         value={this.state.search}
                         onChange={this.inputChange}      
+                        autoComplete='off'
                     >
                     </input>
                 </form>
