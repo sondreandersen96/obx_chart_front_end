@@ -9,7 +9,7 @@ class SuggestionBox extends React.Component {
         //console.log(this.props.tickers);
 
         return this.props.tickers.map( (ticker) => (
-            <SuggestionItem ticker={ticker}/>
+            <SuggestionItem key={ticker.id} ticker={ticker.title} clickOnSuggestion={this.props.clickOnSuggestion}/>
         ));
                
     }

@@ -3,12 +3,12 @@ import './SuggestionItem.css';
 
 class SuggestionItem extends React.Component {
 
-    
+
 
 
     render() {
         return (
-            <a className='suggestionBoxItem'>{this.props.ticker}</a>
+            <a className='suggestionBoxItem' onClick={this.props.clickOnSuggestion} >{this.props.ticker}</a>
         )
     }
 }
