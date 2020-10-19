@@ -60,7 +60,7 @@ class SearchBar extends React.Component {
     // Gives style of either block or none, depending on the state variable searchBoxDisplay
     getSuggestionsStyle = () => {
         return {
-            display: this.state.searchBoxDisplay ? 'block' : 'none'
+            display: this.state.searchBoxDisplay ? 'block' : 'none',
         }
     }
     getFormStyle = () => {
@@ -154,6 +154,10 @@ var counter = 0
                 </div>
 
 */
+
+
+
+
 
 
 

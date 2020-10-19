@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-
 import logo from './logo.svg';
 import './App.css';
 
@@ -42,17 +41,15 @@ class App extends React.Component {
       .then(res => {
         const datas = res.data;
 
+        // Saving data on current company to the state of this component. 
+        this.setState({close: datas.close})
+        this.setState({volume: datas.volume})
+        this.setState({date: datas.date})
+
 
         console.log(datas.close, datas.volume, datas.date);
       })
   }
-
-
-
-
-
-
-
 
 
   render() {
@@ -60,12 +57,18 @@ class App extends React.Component {
       <div className="App">
         <Header/>
         <Title/>
+
+        <div style={searchBarContainer}>
         <div style={searchBarStyle}>
-          <SearchBar loadData={this.loadData} tickers={this.state.tickers} />          
+          <SearchBar loadData={this.loadData} tickers={this.state.tickers}/>          
+        </div>
         </div>
         
-        <div> 
-          <ThisChart/>
+
+
+
+        <div style={graphContainer}> 
+        <ThisChart ticker={this.state.companyInFocus} close={this.state.close} date={this.state.date}/>
         </div>
         
 
@@ -83,13 +86,32 @@ class App extends React.Component {
 
 
 const searchBarStyle = {
+  height: '500px',
   marginTop: '20px',
+  marginBottom: '0px',
+  position: 'absolute',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  left: '0',
+  right: '0',
+  textAlign: 'center',
+
+}
+
+const searchBarContainer = {
+  height: '100px',
 }
 
 
 
 
+const graphContainer = {
+  width: '80vw',
+  height: '50vh',
+  marginLeft: 'auto',
+  marginRight: 'auto',
 
+}
 
 
 

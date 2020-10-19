@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 
 
@@ -9,14 +9,14 @@ class ThisChart extends React.Component {
 
     get_data = () => {
         const data = {
-            labels: ['Jan', 'Feb', 'Mar'],
+            labels: this.props.date,
             datasets: [
                 {
-                    label: 'Dataset',
+                    label: this.props.ticker,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1,
-                    data: [54, 34, 43]
+                    data: this.props.close
                 }
             ]
         }
@@ -26,22 +26,33 @@ class ThisChart extends React.Component {
 
 
     render() {
-        return (
-            <div>
-                <h2> Bar Example </h2>
-                <Bar
-                    data={this.get_data()}
-                    width={100}
-                    height={100}
-                    options={{maintainAspectRatio: false}}
-        
-                
-                />
-            </div>
-        )
+        if (this.props.close) {
+            return (
+                <div>
+                    <h2 style={chartTitle}> {this.props.ticker} </h2>
+                    <Line
+                        data={this.get_data()}
+                        options={{maintainAspectRatio: true}}
+            
+                    
+                    />
+                </div>
+            )
+        } else {
+            return ('')
+        }
+
     }
 
 }
+
+
+const chartTitle = {
+    textAlign: 'center',
+    color: 'white',
+    textTransform: 'uppercase',
+}
+
 
 
 
