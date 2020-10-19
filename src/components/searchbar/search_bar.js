@@ -29,28 +29,28 @@ class SearchBar extends React.Component {
 
     inputSubmit = (e) => {
         e.preventDefault(); // Prevent the standard refresh when submitting a form. 
-        this.search(); // Runs the function that loads data on a new company.
+        this.search(this.state.search); // Runs the function that loads data on a new company.
+        console.log('inputSubmit kjører');
     }
 
     // This functin should be called whenever we want to submit the input from the search field. 
-    search = () => {
-        console.log(this.state.search);
-
+    search = (searchWord) => {
         // Calls the loaddata function in the main file with the search word as parameter. 
-        this.props.loadData(this.state.search.toUpperCase())
+        this.props.loadData(searchWord);
 
         // Clearing search field
-        this.setState({ search: ""});
+        //this.setState({ search: ""});
 
         // Closes the suggestion dropdown. 
-        this.setState({searchBoxDisplay: false})
+        this.setState({searchBoxDisplay: false});
     }
 
 
     // This function detects clicks on the suggestions and put the suggestion into the search field og searches. 
     clickOnSuggestion = (e) => {
-        this.setState({search: e.target.text}); // This is strictly "un-functional" as the this.search() function is now called here. 
-        this.search();
+        //this.setState({search: e.target.text}); // This is strictly "un-functional" as the this.search() function is now called here. 
+        this.setState({search: e.target.text});
+        this.search(e.target.text);
     }
 
 
@@ -102,7 +102,7 @@ class SearchBar extends React.Component {
                         maxLength='8'
                         placeholder='Ticker...'
                         value={this.state.search}
-                        onChange={this.inputChange}      
+                        onChange={this.inputChange}  
                         autoComplete='off'
                     >
                     </input>
