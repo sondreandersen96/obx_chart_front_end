@@ -1,10 +1,12 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
+
+class MainChart extends React.Component {
 
 
-
-
-class ThisChart extends React.Component {
+    moving_average = () => {
+        
+    }
 
 
     get_data = () => {
@@ -13,9 +15,10 @@ class ThisChart extends React.Component {
             datasets: [
                 {
                     label: this.props.ticker,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(36, 156, 255, 0.2)',
+                    borderColor: 'rgba(36, 156, 255, 1)',
                     borderWidth: 1,
+                    pointRadius: 0,
                     data: this.props.close
                 }
             ]
@@ -32,14 +35,19 @@ class ThisChart extends React.Component {
                     <h2 style={chartTitle}> {this.props.ticker} </h2>
                     <Line
                         data={this.get_data()}
-                        options={{maintainAspectRatio: true}}
+                        options={{
+                            maintainAspectRatio: true,
+                            responsive: true
+                        }}
             
                     
                     />
                 </div>
             )
         } else {
-            return ('')
+            return (
+                <div style={noDataDisplay}> </div>
+            )
         }
 
     }
@@ -53,10 +61,12 @@ const chartTitle = {
     textTransform: 'uppercase',
 }
 
+const noDataDisplay = {
+    display: 'none',
+}
 
 
-
-export default ThisChart; 
+export default MainChart; 
 
 
 

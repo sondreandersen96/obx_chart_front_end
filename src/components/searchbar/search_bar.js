@@ -17,7 +17,7 @@ class SearchBar extends React.Component {
         document.addEventListener('keypress', (e) => {
             if (e.key == 'Enter' && this.state.searchBoxDisplay) {
                 // Runs the function that loads data on a new company.
-                this.search();
+                this.search(this.state.search);
             }
         })       
     }

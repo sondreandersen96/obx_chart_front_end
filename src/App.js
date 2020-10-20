@@ -6,10 +6,10 @@ import './App.css';
 import Header from './components/layout/Header.js';
 import Title from './components/layout/Title.js';
 import SearchBar from './components/searchbar/search_bar.js';
+import MainChart from './components/MainChart.js';
+import MovingAverageBtn from './components/MovingAverageBtn';
 
-
-import ThisChart from './TestPlot.js';
-
+import { Container, Row, Col } from 'react-bootstrap';
 
 class App extends React.Component {
 
@@ -68,9 +68,22 @@ class App extends React.Component {
 
 
         <div style={graphContainer}> 
-        <ThisChart ticker={this.state.companyInFocus} close={this.state.close} date={this.state.date}/>
+        <MainChart ticker={this.state.companyInFocus} close={this.state.close} date={this.state.date}/>
         </div>
         
+        <div style={chartBtnContainer}>
+            <Row>
+              <Col md={4} style={chartBtnCol}> 
+                <MovingAverageBtn name={['Moving Average', '10']} />
+              </Col>
+              <Col md={4} style={chartBtnCol}> 
+                <MovingAverageBtn name={['Moving Average', '20']} />
+              </Col>
+              <Col md={4} style={chartBtnCol}> 
+                <MovingAverageBtn name={['Moving Average', '30']} />
+              </Col>
+            </Row>
+        </div>
 
 
 
@@ -103,18 +116,26 @@ const searchBarContainer = {
 }
 
 
-
-
 const graphContainer = {
+  width: '80vw',
+  height: 'auto',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+}
+
+const chartBtnContainer = {
   width: '80vw',
   height: '50vh',
   marginLeft: 'auto',
   marginRight: 'auto',
-
+  marginTop: '0px',
+  textAlign: 'center',
 }
 
-
-
+const chartBtnCol = {
+  margin: '10px',
+  display: 'inline-block',
+}
 
 
 
