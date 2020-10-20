@@ -1,0 +1,24 @@
+.btnContainer {
+    border-style: solid;
+    border-color: rgba(220,220,220, 1);
+    border-radius: 10px;
+    border-width: 2px;
+    width: 200px;
+    height: 52px;
+    padding: 10px;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btnContainer:hover {
+    background-color: rgba(10,10,10,1);
+    cursor: pointer;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.4);
+    transition: ease-in 0.2s;
+
+}
+
+
+.btnText {
+    font-size: 17px;
+}
+

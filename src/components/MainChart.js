@@ -23,6 +23,10 @@ class MainChart extends React.Component {
                 }
             ]
         }
+        // Adding moving average data from the state
+
+
+
 
         return data;
     }

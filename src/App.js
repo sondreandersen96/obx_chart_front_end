@@ -3,6 +3,8 @@ import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
 
+import get_moving_average from './moving_avg_function';
+
 import Header from './components/layout/Header.js';
 import Title from './components/layout/Title.js';
 import SearchBar from './components/searchbar/search_bar.js';
@@ -16,6 +18,8 @@ class App extends React.Component {
   state = {
     tickers: [],
     companyInFocus: false,
+    movingAverageData: [], 
+    movingAverageActive: {mv5: false, mv10: false, mv25: false, mv50: false, mv100: false, mv200: false},  
   }
 
   componentDidMount = () => {
@@ -32,7 +36,10 @@ class App extends React.Component {
   // Runs when search bar is submitted, then sets state of searchWord to 
   // .. the search word and request data on company to API and store the data in state. 
   loadData = (searchWord) => {
-    console.log(searchWord);
+
+    // Rest moving average data 
+    this.setState({movingAverageData: {}});
+
     this.setState({companyInFocus: searchWord});
 
     const security = searchWord;
@@ -48,8 +55,50 @@ class App extends React.Component {
 
 
         console.log(datas.close, datas.volume, datas.date);
+
+        // Calculate moving average 
+        let moving_average_5 = get_moving_average(datas.close, 5);
+        let moving_average_10 = get_moving_average(datas.close, 10);
+        let moving_average_25 = get_moving_average(datas.close, 25);
+        let moving_average_50 = get_moving_average(datas.close, 50);
+        let moving_average_100 = get_moving_average(datas.close, 100);
+        let moving_average_200 = get_moving_average(datas.close, 200);
+
+        // Adding moving average arrays to the state
+        this.setState({movingAverageData: {...this.state.movingAverageData, 'mv5': moving_average_5}  })
+        this.setState({movingAverageData: {...this.state.movingAverageData, 'mv10': moving_average_10}  })
+        this.setState({movingAverageData: {...this.state.movingAverageData, 'mv25': moving_average_25}  })
+        this.setState({movingAverageData: {...this.state.movingAverageData, 'mv50': moving_average_50}  })
+        this.setState({movingAverageData: {...this.state.movingAverageData, 'mv100': moving_average_100}  })
+        this.setState({movingAverageData: {...this.state.movingAverageData, 'mv200': moving_average_200}  })
       })
   }
+
+
+
+  // Moving average button function. This function is called when a moving average button is clicked.
+  // ... it sets the state variable movingAverage to one of the following:
+  // 1. Button is not active: set STATE 'mvN' (N = [5, 10, 25, 50, 100, 200]) = true 
+  // 2. Button is active: set moving average state to false. 
+  click_movingAverage = (btnName) => {
+    let btn_that_is_clicked = 'mv'+btnName; // Variable that equates to that in the state dictionary. 
+    
+    let new_movingAverageActive = this.state.movingAverageActive;
+    new_movingAverageActive[btn_that_is_clicked] = !new_movingAverageActive[btn_that_is_clicked];
+
+    this.setState( {movingAverageActive: new_movingAverageActive} );
+
+
+    console.log(this.state.movingAverageActive[btn_that_is_clicked]);
+    console.log('Clicked', btnName);
+  }
+
+
+    //this.setState({clicked: !this.state.clicked})
+
+
+
+  //e.target.querySelector('h2')
 
 
   render() {
@@ -68,19 +117,19 @@ class App extends React.Component {
 
 
         <div style={graphContainer}> 
-        <MainChart ticker={this.state.companyInFocus} close={this.state.close} date={this.state.date}/>
+        <MainChart ticker={this.state.companyInFocus} close={this.state.close} date={this.state.date} movingAverageData={this.state.movingAverageData}/>
         </div>
         
         <div style={chartBtnContainer}>
             <Row>
               <Col md={4} style={chartBtnCol}> 
-                <MovingAverageBtn name={['Moving Average', '10']} />
+                <MovingAverageBtn click_movingAverage={this.click_movingAverage} name={['Moving Average', '10']} />
               </Col>
               <Col md={4} style={chartBtnCol}> 
-                <MovingAverageBtn name={['Moving Average', '20']} />
+                <MovingAverageBtn click_movingAverage={this.click_movingAverage} name={['Moving Average', '25']} />
               </Col>
               <Col md={4} style={chartBtnCol}> 
-                <MovingAverageBtn name={['Moving Average', '30']} />
+                <MovingAverageBtn click_movingAverage={this.click_movingAverage} name={['Moving Average', '50']} />
               </Col>
             </Row>
         </div>
@@ -99,7 +148,7 @@ class App extends React.Component {
 
 
 const searchBarStyle = {
-  height: '500px',
+  height: '100px',
   marginTop: '20px',
   marginBottom: '0px',
   position: 'absolute',
