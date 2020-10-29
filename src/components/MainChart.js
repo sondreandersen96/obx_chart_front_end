@@ -9,8 +9,11 @@ class MainChart extends React.Component {
     }
 
 
+
+
+
     get_data = () => {
-        const data = {
+        let data = {
             labels: this.props.date,
             datasets: [
                 {
@@ -25,13 +28,45 @@ class MainChart extends React.Component {
         }
         // Adding moving average data from the state
         //const activeMovingAverage = this.props.movingAverageActive.map((x, y) => x);
+        //return data;
 
-        //for (let i = 0; )
+
+        console.log('start');
+        let activeBtns = this.props.movingAverageActive;
+        for (let key in activeBtns) {
+            console.log(activeBtns[key]);
+            if (activeBtns[key] === true) {
+                console.log(this.props.movingAverageData[key]);
+                data.datasets.push({
+                    label: key,
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    backgroundColor: 'rgba(36, 156, 255, 0.2)',
+                    borderColor: 'rgba(100, 100, 100, 1)',
+                    data: this.props.movingAverageData[key]
+                })
+            }
+        }
+        // Funker greit nå, men bør kanskje vurdere at det ikke skal være mulig å ha alle knappene aktive samtidig, 
+        // grunnen er at det blir veldig mye data i charten, noe som gjør at ting går ganske sakte....
 
 
         return data;
     }
 
+    /*
+    componentWillReceiveProps = () => {
+        console.log('start');
+        let activeBtns = this.props.movingAverageActive;
+        for (let key in activeBtns) {
+            console.log(activeBtns[key]);
+            if (activeBtns[key] === true) {
+                console.log(this.props.movingAverageData[key]);
+                
+            }
+        }
+    }
+    */
 
     render() {
         if (this.props.close) {
