@@ -24,8 +24,9 @@ class MainChart extends React.Component {
             ]
         }
         // Adding moving average data from the state
+        //const activeMovingAverage = this.props.movingAverageActive.map((x, y) => x);
 
-
+        //for (let i = 0; )
 
 
         return data;

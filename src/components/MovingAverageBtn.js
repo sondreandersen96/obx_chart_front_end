@@ -21,6 +21,8 @@ class MovingAverageBtn extends React.Component {
         }
     }
 
+    
+
     render() {
         const btn_name1 = this.props.name[0]
         const btn_name2 = this.props.name[1]

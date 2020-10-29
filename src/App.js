@@ -19,7 +19,8 @@ class App extends React.Component {
     tickers: [],
     companyInFocus: false,
     movingAverageData: [], 
-    movingAverageActive: {mv5: false, mv10: false, mv25: false, mv50: false, mv100: false, mv200: false},  
+    movingAverageActive: {mv5: false, mv10: false, mv25: false, mv50: false, mv100: false, mv200: false},
+    chartLoadingSpinner: false, 
   }
 
   componentDidMount = () => {
@@ -31,21 +32,24 @@ class App extends React.Component {
       });
   }
 
-
-
   // Runs when search bar is submitted, then sets state of searchWord to 
   // .. the search word and request data on company to API and store the data in state. 
   loadData = (searchWord) => {
 
-    // Rest moving average data 
-    this.setState({movingAverageData: {}});
+    // Start the loading spinner 
+    this.setState({chartLoadingSpinner: true});
 
-    this.setState({companyInFocus: searchWord});
+    // Reset moving average data 
+    this.setState({movingAverageData: {}});
 
     const security = searchWord;
 
     axios.get(`/api/priceHistory/ ${security}`)
       .then(res => {
+        // Remove loading spinner
+        this.setState({chartLoadingSpinner: false});
+
+        this.setState({companyInFocus: searchWord});
         const datas = res.data;
 
         // Saving data on current company to the state of this component. 
@@ -72,6 +76,7 @@ class App extends React.Component {
         this.setState({movingAverageData: {...this.state.movingAverageData, 'mv100': moving_average_100}  })
         this.setState({movingAverageData: {...this.state.movingAverageData, 'mv200': moving_average_200}  })
       })
+
   }
 
 
@@ -96,9 +101,56 @@ class App extends React.Component {
 
     //this.setState({clicked: !this.state.clicked})
 
+    // Moving average btn container style 
+    chartBtnContainerStyle = () => {
+      return {
+        width: '80vw',
+        height: '50vh',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: '0px',
+        textAlign: 'center',
+        //display: this.state.companyInFocus ? 'block' : 'none',
+        visibility: this.state.companyInFocus ? 'visible' : 'hidden',
+        //transition: 'all ease-in 2s',
+      }
+  }
+
+  getLoadingSpinnerStyle = () => {
+    return {
+      border: '16px solid #bbbbbb',
+      borderTop: '16px solid #0d82d1',
+      borderRadius: '50%',
+      width: '120px',
+      height: '120px',
+      animation: 'spin 0.45s linear infinite',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      position: 'absolute',
+      left: '0',
+      right: '0',
+      marginTop: '30px',
+      display: this.state.chartLoadingSpinner ? 'block' : 'none',
+    }
+  }
+  getLoadingSpinnerContainerStyle = () => {
+    return {
+      background: '#1a1a1a',
+      width: '220px',
+      height: '215px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: '10px',
+      position: 'absolute',
+      left: '0',
+      right: '0',
+      borderRadius: '8%',
+      display: this.state.chartLoadingSpinner ? 'block' : 'none',
+    }
+  }
 
 
-  //e.target.querySelector('h2')
+
 
 
   render() {
@@ -113,36 +165,44 @@ class App extends React.Component {
         </div>
         </div>
         
-
-
-
-        <div style={graphContainer}> 
-        <MainChart ticker={this.state.companyInFocus} close={this.state.close} date={this.state.date} movingAverageData={this.state.movingAverageData}/>
+        <div style={this.getLoadingSpinnerContainerStyle()}>
+          <div style={this.getLoadingSpinnerStyle()}></div>
         </div>
         
-        <div style={chartBtnContainer}>
+        
+        <div style={graphContainer}> 
+        <MainChart ticker={this.state.companyInFocus} close={this.state.close} date={this.state.date} movingAverageData={this.state.movingAverageData} movingAverageActive={this.state.movingAverageActive}/>
+        </div>
+        
+        <div style={this.chartBtnContainerStyle()}>
             <Row>
+              <Col md={4} style={chartBtnCol}> 
+                <MovingAverageBtn click_movingAverage={this.click_movingAverage} name={['Moving Average', '5']} />
+              </Col>
               <Col md={4} style={chartBtnCol}> 
                 <MovingAverageBtn click_movingAverage={this.click_movingAverage} name={['Moving Average', '10']} />
               </Col>
               <Col md={4} style={chartBtnCol}> 
                 <MovingAverageBtn click_movingAverage={this.click_movingAverage} name={['Moving Average', '25']} />
               </Col>
+            </Row>
+            <Row>
               <Col md={4} style={chartBtnCol}> 
                 <MovingAverageBtn click_movingAverage={this.click_movingAverage} name={['Moving Average', '50']} />
               </Col>
+              <Col md={4} style={chartBtnCol}> 
+                <MovingAverageBtn click_movingAverage={this.click_movingAverage} name={['Moving Average', '100']} />
+              </Col>
+              <Col md={4} style={chartBtnCol}> 
+                <MovingAverageBtn click_movingAverage={this.click_movingAverage} name={['Moving Average', '200']} />
+              </Col>
             </Row>
         </div>
-
-
-
 
       </div>
     );
   
   }
-
-  
 }
 
 
@@ -172,6 +232,7 @@ const graphContainer = {
   marginRight: 'auto',
 }
 
+/*
 const chartBtnContainer = {
   width: '80vw',
   height: '50vh',
@@ -180,11 +241,16 @@ const chartBtnContainer = {
   marginTop: '0px',
   textAlign: 'center',
 }
+*/
 
 const chartBtnCol = {
   margin: '10px',
   display: 'inline-block',
 }
+
+
+
+
 
 
 

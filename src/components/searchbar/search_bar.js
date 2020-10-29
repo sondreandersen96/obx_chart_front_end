@@ -83,7 +83,7 @@ class SearchBar extends React.Component {
         }
         console.log('kjorer');
         counter = counter + 1;
-        console.log(counter)
+        console.log(counter);
     }
 
 
