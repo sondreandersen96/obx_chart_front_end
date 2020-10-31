@@ -29,8 +29,6 @@ class MainChart extends React.Component {
         // Adding moving average data from the state
         //const activeMovingAverage = this.props.movingAverageActive.map((x, y) => x);
         //return data;
-
-
         console.log('start');
         let activeBtns = this.props.movingAverageActive;
         for (let key in activeBtns) {
@@ -42,7 +40,7 @@ class MainChart extends React.Component {
                     borderWidth: 1,
                     pointRadius: 0,
                     backgroundColor: 'rgba(36, 156, 255, 0.2)',
-                    borderColor: 'rgba(100, 100, 100, 1)',
+                    borderColor: 'rgba(0, 0, 0, 1)',
                     data: this.props.movingAverageData[key]
                 })
             }
