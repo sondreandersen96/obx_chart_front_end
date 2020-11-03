@@ -1,7 +1,12 @@
+html {
+
+}
+
 body {
   background: #333333;
 }
 
+/*
 ::-webkit-scrollbar {
   background: transparent;
   width: 9px;
@@ -11,9 +16,26 @@ body {
   background: #888;
   border-radius: 20px;
 }
+*/
+/*
+::-webkit-scrollbar {
+  background: gray;
+}
+::-webkit-scrollbar-thumb {
+  background: black;
+}
+*/
+
+
 
 /*To make the loading spinner spin*/
 @keyframes spin {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(360deg);}
+}
+
+
+
+.App {
+  padding-bottom: 80px; /* A little more than the height of the footer*/
 }

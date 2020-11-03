@@ -9,9 +9,6 @@ import get_moving_average from './moving_avg_function';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 
-
-
-
 class ChartView extends React.Component {
 
 	state = {
@@ -101,15 +98,14 @@ class ChartView extends React.Component {
 	// Moving average btn container style 
 	chartBtnContainerStyle = () => {
 		return {
-		width: '80vw',
-		height: '50vh',
-		marginLeft: 'auto',
-		marginRight: 'auto',
-		marginTop: '0px',
-		textAlign: 'center',
-		//display: this.state.companyInFocus ? 'block' : 'none',
-		visibility: this.state.companyInFocus ? 'visible' : 'hidden',
-		//transition: 'all ease-in 2s',
+			width: '80vw',
+			marginLeft: 'auto',
+			marginRight: 'auto',
+			marginTop: '0px',
+			textAlign: 'center',
+			//display: this.state.companyInFocus ? 'block' : 'none',
+			visibility: this.state.companyInFocus ? 'visible' : 'hidden',
+			//transition: 'all ease-in 2s',
 		}
 	}
 

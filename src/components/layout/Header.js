@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './header.css';
 
 
 class Header extends React.Component {
@@ -8,9 +8,9 @@ class Header extends React.Component {
         return (
             <header style={headerSizeAndBackground}>
             
-                <a style={linkStyle} href='#'>About </a>
-                <a style={linkStyle} href='#'>Companies </a>
-                <a style={linkStyle} href='#'>Home </a>
+                <a style={linkStyle} href='/about'>About </a>
+                <a style={linkStyle} href='/companies'>Companies </a>
+                <a style={linkStyle} href='/'>Home </a>
 
             </header> 
 
@@ -26,7 +26,6 @@ const headerSizeAndBackground = {
 }
 
 const linkStyle = {
-    color: 'white',
     textDecoration: 'none',
     display: 'inline-block',
     float: 'right',
