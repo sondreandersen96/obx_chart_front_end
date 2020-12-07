@@ -2,9 +2,7 @@
 
 This is a simple stock price dashboard created using React with Flask as the backend API ([which can be found here](https://github.com/sondreandersen96/obx_chart_back_end)).
 
-Below follows a short demo of how the site works. 
 
-![demo](demo.gif)
 
 
 
