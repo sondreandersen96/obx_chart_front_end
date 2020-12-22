@@ -7,7 +7,7 @@ class Title extends React.Component {
     render() {
         return (
             <div style={titleStyle}>
-                <div style={titleTextStyle}>Seeking Alpha</div>
+                <div style={titleTextStyle}>Alpha Finder</div>
             </div>
 
         )
